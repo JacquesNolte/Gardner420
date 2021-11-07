@@ -7,7 +7,7 @@ export const utils = fastifyPlugin(async function (fastify, opts, next) {
     pinPower: new PinPower(),
     moistureReader: new MoistureReader(fastify),
   }
-  
+
   fastify.decorate('utils', utils)
 
   next()

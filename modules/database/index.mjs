@@ -17,7 +17,7 @@ export async function connectToDatabase (fastify, config) {
 
     // When successfully connected
     db.on('connected', async () => {
-      fastify.log.info('Connected to database' )
+      fastify.log.info('Connected to database')
       // Initialise models
       for (const model in models) {
         await db.model(models[model].referenceKey, await models[model].schema())
