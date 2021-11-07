@@ -1,0 +1,18 @@
+version: "3.5"
+
+services:
+
+  mongo:
+    hostname: mongo
+    domainname: docker
+    container_name: gardner.mongo
+    image: mongo:5
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongovol:/data/db
+      - mongovol:/data/configdb
+
+volumes:
+  mongovol:
+    driver: "local"

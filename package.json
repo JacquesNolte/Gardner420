@@ -1,0 +1,26 @@
+{
+  "name": "gardner",
+  "version": "1.0.0",
+  "description": "Monitors and manages growth",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node --experimental-specifier-resolution=node index.mjs",
+    "dev": "nodemon --experimental-specifier-resolution=node index.mjs"
+  },
+  "author": "TJ",
+  "license": "ISC",
+  "dependencies": {
+    "ads1115": "^1.2.0",
+    "agenda": "^4.2.1",
+    "bme280": "^2.1.1",
+    "fastify": "^3.23.0",
+    "fastify-plugin": "^3.0.0",
+    "i2c-bus": "^5.2.2",
+    "luxon": "^2.0.2",
+    "mongoose": "^6.0.12",
+    "onoff": "^6.0.3"
+  },
+  "devDependencies": {
+    "pino-pretty": "^7.2.0"
+  }
+}
