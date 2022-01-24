@@ -32,9 +32,9 @@ export const config = {
     { name: 'Light', pin: 19, gpioPin: 20 },
   ],
   soilMoistureSensor: {
-    gpioPin: 15,
-    zeroSaturation: 0,
-    fullSaturation: 0
+    bus: 0,
+    zeroSaturation: 2992,
+    fullSaturation: 2976
   }
 }
 

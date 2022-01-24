@@ -13,6 +13,7 @@ export async function startSchedules (fastify) {
   agenda.define('monitorSensorData', async () => {
     const { temperature, humidity } = await sensors.readEnvironmentalData()
 
+    console.log(sensors.readEnvironmentalData())
     const conditionsData = await conditions.getConditions()
     const deviceData = await devices.getDevices()
 
@@ -39,7 +40,7 @@ export async function startSchedules (fastify) {
       for (const humidifier of humidifiers) if (!humidifier.keepActive) await devices.setDeviceStateOff(humidifier)
     }
 
-    // ToDo(Reach for the Start): soil moisture, ph, ec implementation with pumps
+    // ToDo(Reach for the Stars): soil moisture, ph, ec implementation with pumps
   })
 
   agenda.define('saveSensorData', async () => {

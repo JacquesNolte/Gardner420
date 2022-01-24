@@ -15,7 +15,7 @@ fastify.decorate('_config', config)
 
 await connectToDatabase(fastify, config.db)
 
-fastify.register(utils)
+await fastify.register(utils)
 fastify.register(setupRoutes, { prefix: '/api', logLevel: 'error' })
 
 await startSchedules(fastify)

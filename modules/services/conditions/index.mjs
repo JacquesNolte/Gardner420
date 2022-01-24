@@ -63,8 +63,8 @@ export class Conditions extends BaseService {
     let conditions = await this.models.conditions.findOne().sort({ createdAt: -1 }).select(['-createdAt', '-updatedAt', '-_id']).lean()
     conditions = conditions || { dayNightCycle: { day: 1, night: 0 } }
     conditions.dayNightCycle = { day: params.day, night: params.night }
+    
     return this.models.conditions.create(conditions)
-
   }
 
   async getConditions () {

@@ -1,4 +1,5 @@
 import { BaseService } from '../base.service.mjs'
+import * as bme from 'bme280'
 
 let bmeSensor = await bme.open({
   humidityOversampling: bme.OVERSAMPLE.X4,
@@ -29,7 +30,7 @@ export class Sensors extends BaseService {
   }
 
   async readSoilMoisture () {
-    return await this.utils.soilMoisture.getMoistureData()
+    return await this.utils.moistureReader.getMoistureData()
   }
 
 }

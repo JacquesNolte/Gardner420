@@ -1,4 +1,4 @@
-import { Sensors } from '../../services/sensors/index.mjs'
+import { Sensors } from '../../services/index.mjs'
 
 export async function routes (fastify, opts, next) {
   const sensors = new Sensors(fastify)

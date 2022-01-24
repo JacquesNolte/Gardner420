@@ -1,5 +1,5 @@
-import i2c from 'i2c-bus'
 import ADS1115 from 'ads1115'
+import * as i2c from 'i2c-bus'
 
 export class MoistureReader {
 
@@ -8,14 +8,14 @@ export class MoistureReader {
   }
 
   async getMoistureData () {
-    const bus = await i2c.openPromisified(this.config.gpioPin)
+    const bus = await i2c.openPromisified(this.config.bus)
     const sensor = ADS1115(bus)
     const sensorValue = await sensor.measure('0+GND')
-    const promiseBus = bus.promisifiedBus()
 
-    promiseBus.close()
+    console.log(sensorValue)
+    await bus.close()
 
-    const moistureLevel = Math.abs((sensorValue - this.config.zeroSaturation / (this.config.fullSaturation - this.config.zeroSaturation))) * 100
+    const moistureLevel = Math.abs(((sensorValue - this.config.zeroSaturation) / (this.config.fullSaturation - this.config.zeroSaturation))) * 100
 
     return Math.round(moistureLevel)
   }
