@@ -18,11 +18,6 @@ export async function setupRoutes (fastify, opts, next) {
 
   let routes = await getAllRouteDirectories(`${process.env.APP_ROOT}/modules/routes`)
 
-  fastify.register(require('fastify-cors'), {
-    origin: '*',
-    methods: ['POST', 'GET', 'PUT', 'DELETE']
-  });
-
   for (let route of routes) {
     const routeFunction = () => import(`./${route}`).then(m => m.routes)
     fastify.register(await routeFunction())
