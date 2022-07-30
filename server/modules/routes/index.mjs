@@ -1,5 +1,6 @@
 import { join } from 'path'
 import { readdir, stat } from 'fs/promises'
+import { cors } from '@fastify/cors'
 
 const getAllRouteDirectories = async (path) => {
   let dirs = []
@@ -17,6 +18,11 @@ export async function setupRoutes (fastify, opts, next) {
   })
 
   let routes = await getAllRouteDirectories(`${process.env.APP_ROOT}/modules/routes`)
+
+  fastify.register(cors, {
+    origin: '*',
+    methods: ['POST', 'GET', 'PUT', 'DELETE']
+  });
 
   for (let route of routes) {
     const routeFunction = () => import(`./${route}`).then(m => m.routes)
