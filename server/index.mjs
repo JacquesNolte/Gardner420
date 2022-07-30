@@ -26,7 +26,7 @@ fastify.register(fastifyCors, {
 
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, 'static'),
-  prefix: '/web/', // optional: default '/'
+  prefix: '/web', // optional: default '/'
   index: 'index.html'
 })
 
