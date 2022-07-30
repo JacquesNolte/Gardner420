@@ -10,6 +10,8 @@
   "author": "TJ",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cors": "^7.0.0",
+    "@fastify/static": "^6.5.0",
     "ads1115": "^1.2.0",
     "agenda": "^4.2.1",
     "bme280": "^2.1.1",

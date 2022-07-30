@@ -1,5 +1,7 @@
 import * as path from 'path'
 import Fastify from 'fastify'
+import fastifyStatic from '@fastify/static'
+import fastifyCors from '@fastify/cors'
 import config from './config/default.mjs'
 import { connectToDatabase, setupRoutes, utils } from './modules'
 import { startSchedules } from './modules/utils/scheduler/index.mjs'
@@ -16,6 +18,18 @@ fastify.decorate('_config', config)
 await connectToDatabase(fastify, config.db)
 
 await fastify.register(utils)
+
+fastify.register(fastifyCors, {
+  origin: '*',
+  methods: 'GET,PUT,POST,DELETE'
+})
+
+fastify.register(fastifyStatic, {
+  root: path.join(__dirname, 'static'),
+  prefix: '/web/', // optional: default '/'
+  index: 'index.html'
+})
+
 fastify.register(setupRoutes, { prefix: '/api', logLevel: 'error' })
 
 await startSchedules(fastify)
