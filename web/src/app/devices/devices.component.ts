@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DevicesProvider } from '../providers';
 
 export interface PeriodicElement {
   name: string;
@@ -19,12 +20,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class DevicesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public devicesProvider: DevicesProvider,
+  ) { }
 
   ngOnInit(): void {
   }
 
   displayedColumns: string[] = ['name', 'type', 'pin'];
   dataSource = ELEMENT_DATA;
+
+  public getDevices(){
+    console.log('Getting Devices!')
+    this.devicesProvider.getDevices().subscribe((res) => {
+      console.log(res)
+    })
+  }
 
 }
