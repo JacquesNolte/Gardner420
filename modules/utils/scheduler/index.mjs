@@ -13,7 +13,6 @@ export async function startSchedules (fastify) {
   agenda.define('monitorSensorData', async () => {
     const { temperature, humidity } = await sensors.readEnvironmentalData()
 
-    console.log(sensors.readEnvironmentalData())
     const conditionsData = await conditions.getConditions()
     const deviceData = await devices.getDevices()
 

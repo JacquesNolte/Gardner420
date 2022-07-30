@@ -2,6 +2,7 @@ import { BaseService } from '../base.service.mjs'
 import * as bme from 'bme280'
 
 let bmeSensor = await bme.open({
+  i2cBusNumber: 1,
   humidityOversampling: bme.OVERSAMPLE.X4,
   pressureOversampling: bme.OVERSAMPLE.X4,
   temperatureOversampling: bme.OVERSAMPLE.X4
@@ -11,6 +12,7 @@ export class Sensors extends BaseService {
 
   async initialiseConnection () {
     bmeSensor = await bme.open({
+      i2cBusNumber: 1,
       humidityOversampling: bme.OVERSAMPLE.X4,
       pressureOversampling: bme.OVERSAMPLE.X4,
       temperatureOversampling: bme.OVERSAMPLE.X4
@@ -19,7 +21,7 @@ export class Sensors extends BaseService {
 
   async readEnvironmentalData (insertIntoDb = false) {
     const environmentData = await bmeSensor.read()
-    const soilMoisture = await this.readSoilMoisture()
+    const soilMoisture = 0
     if (insertIntoDb) await this.models.values.create({
       temperature: environmentData.temperature,
       humidity: environmentData.humidity,

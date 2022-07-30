@@ -12,7 +12,6 @@ export class MoistureReader {
     const sensor = ADS1115(bus)
     const sensorValue = await sensor.measure('0+GND')
 
-    console.log(sensorValue)
     await bus.close()
 
     const moistureLevel = Math.abs(((sensorValue - this.config.zeroSaturation) / (this.config.fullSaturation - this.config.zeroSaturation))) * 100
