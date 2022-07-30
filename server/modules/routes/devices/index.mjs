@@ -3,6 +3,9 @@ import { Devices } from '../../services'
 export async function routes (fastify, opts, next) {
   const devices = new Devices(fastify)
 
+  fastify.header("Access-Control-Allow-Origin", "*");
+  fastify.header("Access-Control-Allow-Methods", "POST");
+
   fastify.post('/devices/retrieve', async function (request, reply) {
     reply.send({
       success: true,
