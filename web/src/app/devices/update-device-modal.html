@@ -1,8 +1,21 @@
-<!-- <h1 mat-dialog-title>Hi Test</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div> -->
+<h2 mat-dialog-title>Update Device</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="name" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Category" formControlName="category" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Pin" formControlName="pin" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Gpio Pin" formControlName="gpioPin" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="onNoClick()">Close</button>
+  <!-- <button class="mat-raised-button mat-primary"(click)="save()">Save</button> -->
+</mat-dialog-actions>

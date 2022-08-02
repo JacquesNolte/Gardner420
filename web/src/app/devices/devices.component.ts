@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DevicesProvider } from '../providers';
 
@@ -28,11 +29,10 @@ export class DevicesComponent implements OnInit {
     this.getDevices()
   }
 
-  public getDevices(){
-    // this.devicesProvider.get().subscribe((res) => {
-    //   this.dataSource = res.data.devices
-    // })
-    this.dataSource = [{name: 'Mars Hydro', category: 'Light', pin: 20, gpioPin: 20, active: false}]
+  public getDevices() {
+    this.devicesProvider.get().subscribe((res) => {
+      this.dataSource = res.data.devices
+    })
   }
 
   openModal(data: any) {
@@ -52,13 +52,27 @@ export class DevicesComponent implements OnInit {
   selector: 'update-device-modal',
   templateUrl: 'update-device-modal.html',
 })
-export class UpdateDeviceModal {
+export class UpdateDeviceModal implements OnInit {
+
+  form!: FormGroup
+  name!: string
+  category!: string
+  pin!: number
+  gpioPin!: number
 
   constructor(
+    private fb: FormBuilder,
     public dialogRef: MatDialogRef<UpdateDeviceModal>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log({ModalData: data})
-    }
+  }
+  ngOnInit() {
+    this.form = this.fb.group({
+      name: [this.data.name, []],
+      category: [this.data.category, []],
+      pin: [this.data.pin, []],
+      gpioPin: [this.data.gpioPin, []]
+      });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
