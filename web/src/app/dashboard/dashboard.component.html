@@ -4,11 +4,11 @@
             <mat-card-title>Dashboard</mat-card-title>
             <mat-card-subtitle>Temperature</mat-card-subtitle>
             <mat-card-content>
-                <p>30°C</p>
+                <p *ngIf="sensors">{{sensors.temperature}}°C</p>
             </mat-card-content>
             <mat-card-subtitle>Humidity</mat-card-subtitle>
             <mat-card-content>
-                <p>66%</p>
+                <p *ngIf="sensors">{{sensors.humidity}}%</p>
             </mat-card-content>
             <mat-card-subtitle>Grow Day</mat-card-subtitle>
             <mat-card-content>

@@ -42,7 +42,16 @@ export class DevicesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    });
+  }
+
+  openAddModal() {
+    const dialogRef = this.dialog.open(AddDeviceModal, {
+      width: '250px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 
@@ -63,6 +72,38 @@ export class UpdateDeviceModal implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<UpdateDeviceModal>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
+  ngOnInit() {
+    this.form = this.fb.group({
+      name: [this.data.name, []],
+      category: [this.data.category, []],
+      pin: [this.data.pin, []],
+      gpioPin: [this.data.gpioPin, []]
+      });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'add-device-modal',
+  templateUrl: 'add-device-modal.html',
+})
+export class AddDeviceModal implements OnInit {
+
+  form!: FormGroup
+  name!: string
+  category!: string
+  pin!: number
+  gpioPin!: number
+
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddDeviceModal>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
   ngOnInit() {

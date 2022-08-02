@@ -11,8 +11,6 @@ export class DevicesProvider {
   public get() {
     const url = '192.168.0.197:8080/api/devices/retrieve'
 
-    console.log({URL: url})
-
     return this.http
       .post<any>('http://192.168.0.197:8080/api/devices/retrieve', {})
   }

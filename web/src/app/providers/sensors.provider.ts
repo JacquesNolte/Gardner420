@@ -11,8 +11,6 @@ export class SensorsProvider {
   public get() {
     const url = '192.168.0.197:8080/api/sensors/retrieve'
 
-    console.log({URL: url})
-
     return this.http
       .post<any>('http://192.168.0.197:8080/api/sensors/retrieve', {})
   }

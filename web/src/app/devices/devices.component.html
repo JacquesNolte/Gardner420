@@ -4,36 +4,7 @@
             <mat-card-title>Devices</mat-card-title>
             <mat-card-subtitle>Add Device</mat-card-subtitle>
             <mat-card-content>
-                <button mat-flat-button color="primary">Get Devices</button>
-                <form>
-                    <div>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Device Name</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Device Pin</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Device Type</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Device Type</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <button mat-flat-button color="primary">Add Device</button>
-                    </div>
-                </form>
+                <button mat-flat-button color="primary" (click)="openAddModal()">Add Device</button>
             </mat-card-content>
             <mat-card-subtitle>List Devices</mat-card-subtitle>
             <mat-card-content>
