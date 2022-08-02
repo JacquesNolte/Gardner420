@@ -4,16 +4,16 @@ import { HttpClient } from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
-export class DevicesProvider {
+export class SensorsProvider {
 
   constructor(public http: HttpClient) { }
 
   public get() {
-    const url = '192.168.0.197:8080/api/devices/retrieve'
+    const url = '192.168.0.197:8080/api/sensors/retrieve'
 
     console.log({URL: url})
 
     return this.http
-      .post<any>('http://192.168.0.197:8080/api/devices/retrieve', {})
+      .post<any>('http://192.168.0.197:8080/api/sensors/retrieve', {})
   }
 }

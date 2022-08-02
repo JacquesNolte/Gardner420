@@ -11,7 +11,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DevicesProvider, ConfigurationProvider } from './providers';
+import { DevicesProvider, ConfigurationProvider,SensorsProvider } from './providers';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { DevicesProvider, ConfigurationProvider } from './providers';
   ],
   providers: [
     DevicesProvider,
-    ConfigurationProvider
+    ConfigurationProvider,
+    SensorsProvider
   ],
   bootstrap: [AppComponent]
 })
