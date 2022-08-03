@@ -14,4 +14,22 @@ export class DevicesProvider {
     return this.http
       .post<any>('http://192.168.0.197:8080/api/devices/retrieve', {})
   }
+
+  public update(payload: any) {
+    
+  }
+
+  public create(payload: any) {
+
+    return this.http
+      .post<any>('http://192.168.0.197:8080/api/devices/create', payload)
+  }
+
+  public delete(payload: any) {
+    
+  }
+
+  public setState(payload: any){
+    
+  }
 }

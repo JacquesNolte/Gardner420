@@ -14,4 +14,16 @@ export class ConfigurationProvider {
     return this.http
       .post<any>('http://192.168.0.197:8080/api/conditions/retrieve', {})
   }
+
+  public setTemperature(payload: any) {
+
+  }
+
+  public setHumidity(payload: any) {
+
+  }
+
+  public setLightCycle(payload: any) {
+    
+  }
 }

@@ -68,6 +68,7 @@ export class UpdateDeviceModal implements OnInit {
   category!: string
   pin!: number
   gpioPin!: number
+  _id!: string
 
   constructor(
     private fb: FormBuilder,
@@ -79,11 +80,19 @@ export class UpdateDeviceModal implements OnInit {
       name: [this.data.name, []],
       category: [this.data.category, []],
       pin: [this.data.pin, []],
-      gpioPin: [this.data.gpioPin, []]
+      gpioPin: [this.data.gpioPin, []],
+      _id: [this.data._id, []]
       });
   }
 
   onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  public save(){
+    console.log('Save')
+    console.log(this.form.value)
+
     this.dialogRef.close();
   }
 
@@ -103,6 +112,7 @@ export class AddDeviceModal implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    public devicesProvider: DevicesProvider,
     public dialogRef: MatDialogRef<AddDeviceModal>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
@@ -113,6 +123,23 @@ export class AddDeviceModal implements OnInit {
       pin: [this.data.pin, []],
       gpioPin: [this.data.gpioPin, []]
       });
+  }
+
+  public save(){
+    console.log('Save')
+
+    const body = {
+      name: this.form.value.name,
+      category: this.form.value.category,
+      pin: Number(this.form.value.pin),
+      gpioPin: Number(this.form.value.gpioPin)
+    }
+
+    this.devicesProvider.create(body).subscribe((res) => {
+      console.log(res)
+    })
+
+    this.dialogRef.close();
   }
 
   onNoClick(): void {
