@@ -18,7 +18,7 @@ export class DevicesComponent implements OnInit {
 
   public dataSource: any
 
-  displayedColumns: string[] = ['name', 'category', 'pin', 'gpioPin', 'active', 'update']
+  displayedColumns: string[] = ['name', 'category', 'pin', 'gpioPin', 'active', 'update', 'delete']
 
   constructor(
     public devicesProvider: DevicesProvider,
@@ -32,6 +32,12 @@ export class DevicesComponent implements OnInit {
   public getDevices() {
     this.devicesProvider.get().subscribe((res) => {
       this.dataSource = res.data.devices
+    })
+  }
+
+  public deleteDevice(device: any) {
+    this.devicesProvider.delete({ name: device.name }).subscribe((res) => {
+      this.getDevices()
     })
   }
 
@@ -126,8 +132,6 @@ export class AddDeviceModal implements OnInit {
   }
 
   public save(){
-    console.log('Save')
-
     const body = {
       name: this.form.value.name,
       category: this.form.value.category,

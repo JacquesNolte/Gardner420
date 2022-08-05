@@ -6,12 +6,13 @@ import { HttpClient } from '@angular/common/http'
 })
 export class SensorsProvider {
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+  ) { }
 
   public get() {
-    const url = '192.168.0.197:8080/api/sensors/retrieve'
 
     return this.http
-      .post<any>('http://192.168.0.197:8080/api/sensors/retrieve', {})
+      .post<any>(`http://192.168.0.105:8080/api/sensors/retrieve`, {})
   }
 }

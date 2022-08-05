@@ -1,1 +1,49 @@
-<p>configuration works!</p>
+<div layout="row" layout-xs="column">
+    <div flex>
+        <mat-card>
+            <mat-card-title>Configuration</mat-card-title>
+            <mat-card-subtitle>Temperature</mat-card-subtitle>
+            <mat-card-content *ngIf="temperatureForm">
+                <form [formGroup]="temperatureForm" id="temperature" (ngSubmit)="setTemperature()">
+                    <mat-dialog-content>
+                        <mat-form-field>
+                            <input matInput placeholder="Min" formControlName="min" />
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Max" formControlName="max" />
+                        </mat-form-field>
+                    </mat-dialog-content>
+                </form>
+                <button class="mat-raised-button mat-primary" form="temperature" type="submit">Save</button>
+            </mat-card-content>
+            <mat-card-subtitle>Humidity</mat-card-subtitle>
+            <mat-card-content *ngIf="humidityForm">
+                <form [formGroup]="humidityForm" id="humidity" (ngSubmit)="setHumidity()">
+                    <mat-dialog-content>
+                        <mat-form-field>
+                            <input matInput placeholder="Min" formControlName="min" />
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Max" formControlName="max" />
+                        </mat-form-field>
+                    </mat-dialog-content>
+                </form>
+                <button class="mat-raised-button mat-primary" form="humidity" type="submit">Save</button>
+            </mat-card-content>
+            <mat-card-subtitle>Light Schedule</mat-card-subtitle>
+            <mat-card-content *ngIf="scheduleForm">
+                <form [formGroup]="scheduleForm" id="schedule" (ngSubmit)="setSchedule()">
+                    <mat-dialog-content>
+                        <mat-form-field>
+                            <input matInput placeholder="Day" formControlName="day" />
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Night" formControlName="night" />
+                        </mat-form-field>
+                    </mat-dialog-content>
+                </form>
+                <button class="mat-raised-button mat-primary" form="schedule" type="submit">Save</button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

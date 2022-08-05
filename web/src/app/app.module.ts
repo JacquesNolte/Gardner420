@@ -29,7 +29,7 @@ import { DevicesProvider, ConfigurationProvider,SensorsProvider } from './provid
     MaterialModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     DevicesProvider,

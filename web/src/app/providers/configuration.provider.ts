@@ -9,21 +9,22 @@ export class ConfigurationProvider {
   constructor(public http: HttpClient) { }
 
   public get() {
-    const url = '192.168.0.197:8080/api/conditions/retrieve'
-
     return this.http
-      .post<any>('http://192.168.0.197:8080/api/conditions/retrieve', {})
+      .post<any>('http://192.168.0.105:8080/api/conditions/retrieve', {})
   }
 
   public setTemperature(payload: any) {
-
+    return this.http
+      .post<any>('http://192.168.0.105:8080/api/conditions/set-temperature', payload)
   }
 
   public setHumidity(payload: any) {
-
+    return this.http
+      .post<any>('http://192.168.0.105:8080/api/conditions/set-humidity', payload)
   }
 
   public setLightCycle(payload: any) {
-    
+    return this.http
+      .post<any>('http://192.168.0.105:8080/api/conditions/set-light-cycle', payload)
   }
 }

@@ -45,4 +45,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  public setDeviceState(device: any){
+    this.devicesProvider.setState({ name: device.name, active: device.active, keepActive: device.keepActive }).subscribe((res: any) => {
+    })
+  }
+
 }
