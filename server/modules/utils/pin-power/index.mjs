@@ -3,21 +3,21 @@ import { Gpio } from 'onoff'
 export class PinPower {
 
   async on (device) {
-    const gpioDevice = new Gpio(device.gpioPin, 'out')
+    const gpioDevice = new Gpio(4, 'out')
 
-    await gpioDevice.write(1)
+    await gpioDevice.writeSync(1)
 
-    await gpioDevice.unexport()
+    // await gpioDevice.unexport()
 
     return true
   }
 
   async off (device) {
-    const gpioDevice = new Gpio(device.gpioPin, 'out')
+    const gpioDevice = new Gpio(4, 'out')
 
-    await gpioDevice.write(0)
+    await gpioDevice.writeSync(0)
 
-    await gpioDevice.unexport()
+    // await gpioDevice.unexport()
 
     return true
   }
