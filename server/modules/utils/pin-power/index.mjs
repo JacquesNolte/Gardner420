@@ -3,7 +3,7 @@ import { Gpio } from 'onoff'
 export class PinPower {
 
   async on (device) {
-    const gpioDevice = new Gpio(4, 'out')
+    const gpioDevice = new Gpio(device.gpioPin, 'out')
 
     await gpioDevice.writeSync(1)
 
@@ -13,7 +13,7 @@ export class PinPower {
   }
 
   async off (device) {
-    const gpioDevice = new Gpio(4, 'out')
+    const gpioDevice = new Gpio(device.gpioPin, 'out')
 
     await gpioDevice.writeSync(0)
 
