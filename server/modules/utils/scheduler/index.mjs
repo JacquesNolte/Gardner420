@@ -81,7 +81,7 @@ export async function startSchedules (fastify) {
   })
 
   await agenda.every('2 seconds', 'monitorSensorData')
-  await agenda.every('10 minutes', ['saveSensorData', 'lightCycle'])
+  await agenda.every('10 seconds', ['saveSensorData', 'lightCycle'])
   await agenda.every('5 minutes', 'fanCirculation')
 
   async function graceful () {
