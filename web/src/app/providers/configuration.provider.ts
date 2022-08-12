@@ -1,30 +1,31 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigurationProvider {
 
-  constructor(public http: HttpClient) { }
+  constructor (public http: HttpClient) { }
 
-  public get() {
+  public get () {
     return this.http
-      .post<any>('http://192.168.0.105:8080/api/conditions/retrieve', {})
+      .post<any>(environment.apiHost + '/api/conditions/retrieve', {})
   }
 
-  public setTemperature(payload: any) {
+  public setTemperature (payload: any) {
     return this.http
-      .post<any>('http://192.168.0.105:8080/api/conditions/set-temperature', payload)
+      .post<any>(environment.apiHost + '/api/conditions/set-temperature', payload)
   }
 
-  public setHumidity(payload: any) {
+  public setHumidity (payload: any) {
     return this.http
-      .post<any>('http://192.168.0.105:8080/api/conditions/set-humidity', payload)
+      .post<any>(environment.apiHost + '/api/conditions/set-humidity', payload)
   }
 
-  public setLightCycle(payload: any) {
+  public setLightCycle (payload: any) {
     return this.http
-      .post<any>('http://192.168.0.105:8080/api/conditions/set-light-cycle', payload)
+      .post<any>(environment.apiHost + '/api/conditions/set-light-cycle', payload)
   }
 }

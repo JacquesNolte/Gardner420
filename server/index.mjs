@@ -24,13 +24,16 @@ fastify.register(fastifyCors, {
   methods: 'GET,PUT,POST,DELETE'
 })
 
+fastify.register(setupRoutes, { prefix: '/api', logLevel: 'error' })
+
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, 'static'),
-  prefix: '/web', // optional: default '/'
   index: 'index.html'
 })
 
-fastify.register(setupRoutes, { prefix: '/api', logLevel: 'error' })
+fastify.setNotFoundHandler(function (request, reply) {
+  reply.sendFile('index.html')
+})
 
 await startSchedules(fastify)
 

@@ -1,6 +1,6 @@
 import { Agenda } from 'agenda/es'
 import { Conditions, Devices, Sensors } from '../../services'
-import { DateTime } from 'luxon'
+import { DateTime, Interval } from 'luxon'
 
 export async function startSchedules (fastify) {
   const agenda = new Agenda(fastify._config.scheduler)
@@ -47,30 +47,29 @@ export async function startSchedules (fastify) {
   })
 
   agenda.define('lightCycle', async () => {
-    await agenda.cancel({ name: 'turnOnLights' })
-    await agenda.cancel({ name: 'turnOffLights' })
-
     const conditionsData = await conditions.getConditions()
 
-    const day = DateTime.local().startOf('day').set({ hour: conditionsData.dayNightCycle.day }).toFormat('HH:mm')
-    const night = DateTime.local().endOf('day').set({ hour: conditionsData.dayNightCycle.night }).toFormat('HH:mm')
+    const now = DateTime.now()
+    const day = DateTime.local().startOf('day').set({ hour: conditionsData.dayNightCycle.day })
+    const night = DateTime.local().endOf('day').set({ hour: conditionsData.dayNightCycle.night })
+    const dayToNight = Interval.fromDateTimes(day, night)
 
-    agenda.define('turnOnLights', async () => {
+    const turnOnLights = async () => {
       const deviceData = await devices.getDevices()
       const lights = deviceData.find(device => device.category === 'light')
 
       for (const light of lights) await devices.setDeviceStateOn(light)
-    })
+    }
 
-    agenda.define('turnOffLights', async () => {
+    const turnOffLights = async () => {
       const deviceData = await devices.getDevices()
       const lights = deviceData.find(device => device.category === 'light')
 
       for (const light of lights) if (!light.keepActive) await devices.setDeviceStateOff(light)
-    })
+    }
 
-    await agenda.schedule(`at ${day}`, 'turnOnLights')
-    await agenda.schedule(`at ${night}`, 'turnOffLights')
+    if (dayToNight.contains(now)) await turnOnLights()
+    else await turnOffLights()
   })
 
   agenda.define('fanCirculation', async () => {
