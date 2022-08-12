@@ -46,10 +46,6 @@ fastify.setErrorHandler(function (error, request, reply) {
   }
 })
 
-fastify.setNotFoundHandler(function (request, reply) {
-  reply.code(404).send({ success: false, error: { name: 'NotFound', message: 'Not Found' } })
-})
-
 await fastify.listen(config.server.port, config.server.host)
 console.log(fastify.printRoutes())
 fastify.log.info(`Started Server in '${process.env.APP_ENV}' mode on Port ${config.server.port}!`)

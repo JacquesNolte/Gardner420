@@ -23,5 +23,9 @@ export async function setupRoutes (fastify, opts, next) {
     fastify.register(await routeFunction())
   }
 
+  fastify.setNotFoundHandler(function (request, reply) {
+    reply.code(404).send({ success: false, error: { name: 'NotFound', message: 'Not Found' } })
+  })
+
   next()
 }
