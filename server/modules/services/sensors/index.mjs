@@ -21,10 +21,12 @@ export class Sensors extends BaseService {
 
   async readEnvironmentalData (insertIntoDb = false) {
     const environmentData = await bmeSensor.read()
+    const vpd = await this.calculateVPD(environmentData.temperature, environmentData.humidity)
     const soilMoisture = 0
     if (insertIntoDb) await this.models.values.create({
       temperature: environmentData.temperature,
       humidity: environmentData.humidity,
+      vpd: vpd,
       soilMoisture
     })
 
@@ -33,6 +35,14 @@ export class Sensors extends BaseService {
 
   async readSoilMoisture () {
     return await this.utils.moistureReader.getMoistureData()
+  }
+
+  async calculateVPD(temperature, humidity) {
+    const VPsat = 610.7 * 107.5 * temperature / (237.3 + temperature)  // Saturation vapor pressure in Pascals
+    const VPactual = (humidity * VPsat) / 100.0  // Actual vapor pressure in Pascals
+    const vpd = ((100.0 - hum) /100.0) * VPsat // Vapor Pressure Deficit in Pascals
+
+    return vpd
   }
 
 }
