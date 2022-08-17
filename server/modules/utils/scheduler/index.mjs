@@ -49,23 +49,41 @@ export async function startSchedules (fastify) {
   agenda.define('lightCycle', async () => {
     const conditionsData = await conditions.getConditions()
 
-    const now = DateTime.now()
+    const now = DateTime.now().plus({ hours: 2 })
     const day = DateTime.local().startOf('day').set({ hour: conditionsData.dayNightCycle.day })
-    const night = DateTime.local().endOf('day').set({ hour: conditionsData.dayNightCycle.night })
+    let night = DateTime.local().endOf('day').set({ hour: conditionsData.dayNightCycle.night })
+
+
+    if(day > night){
+      night = night.plus({ days: 1 })
+    }
+
     const dayToNight = Interval.fromDateTimes(day, night)
 
     const turnOnLights = async () => {
       const deviceData = await devices.getDevices()
       const lights = deviceData.find(device => device.category === 'light')
 
-      for (const light of lights) await devices.setDeviceStateOn(light)
+      if (lights.length > 1){
+        for (const light of lights){
+          await devices.setDeviceStateOn(light)
+        } 
+      }else{
+        await devices.setDeviceStateOn(lights)
+      }
     }
 
     const turnOffLights = async () => {
       const deviceData = await devices.getDevices()
       const lights = deviceData.find(device => device.category === 'light')
 
-      for (const light of lights) if (!light.keepActive) await devices.setDeviceStateOff(light)
+      if (lights.length > 1){
+        for (const light of lights){
+          if (!light.keepActive) await devices.setDeviceStateOff(light)
+        } 
+      }else{
+        if (!lights.keepActive) await devices.setDeviceStateOff(lights)
+      }
     }
 
     if (dayToNight.contains(now)) await turnOnLights()
