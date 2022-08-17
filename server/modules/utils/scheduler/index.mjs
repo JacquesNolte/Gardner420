@@ -21,22 +21,52 @@ export async function startSchedules (fastify) {
 
     if (temperature <= conditionsData.temperature.min) {
 
-      for (const heater of heaters) await devices.setDeviceStateOn(heater)
-      for (const fan of fans) if (!fan.keepActive) await devices.setDeviceStateOff(fan)
+      if(heaters.length > 1){
+        for (const heater of heaters) await devices.setDeviceStateOn(heater)
+      }else{
+        await devices.setDeviceStateOn(heaters)
+      }
+
+      if(fans.length > 1){
+        for (const fan of fans) if (!fan.keepActive) await devices.setDeviceStateOff(fan)
+      } else {
+        if (!fans.keepActive) await devices.setDeviceStateOff(fans)
+      }
+      
     } else if (temperature >= conditionsData.temperature.max) {
 
-      for (const heater of heaters) if (!heater.keepActive) await devices.setDeviceStateOff(heater)
-      for (const fan of fans) await devices.setDeviceStateOn(fan)
+      if(heaters.length > 1){
+        for (const heater of heaters) if (!heater.keepActive) await devices.setDeviceStateOff(heater)
+      } else {
+        if (!heaters.keepActive) await devices.setDeviceStateOff(heaters)
+      }
+
+      if(fans.length > 1){
+        for (const fan of fans) await devices.setDeviceStateOn(fan)
+      } else {
+        await devices.setDeviceStateOn(fans)
+      }
     }
 
     const humidifiers = deviceData.find(device => device.category === 'humidifier')
 
     if (humidity <= conditionsData.humidity.min) {
 
-      for (const humidifier of humidifiers) await devices.setDeviceStateOn(humidifier)
+      if(humidifiers.length > 1){
+        for (const humidifier of humidifiers) await devices.setDeviceStateOn(humidifier)
+      } else {
+        await devices.setDeviceStateOn(humidifiers)
+      }
+
+      
     } else if (humidity >= conditionsData.humidity.max) {
 
-      for (const humidifier of humidifiers) if (!humidifier.keepActive) await devices.setDeviceStateOff(humidifier)
+      if(humidifiers.length > 1){
+        for (const humidifier of humidifiers) if (!humidifier.keepActive) await devices.setDeviceStateOff(humidifier)
+      } else {
+        if (!humidifiers.keepActive) await devices.setDeviceStateOff(humidifiers)
+      }
+
     }
 
     // ToDo(Reach for the Stars): soil moisture, ph, ec implementation with pumps
