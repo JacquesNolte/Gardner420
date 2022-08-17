@@ -124,7 +124,13 @@ export async function startSchedules (fastify) {
     const deviceData = await devices.getDevices()
 
     const fans = deviceData.find(device => device.category === 'circulation_fan')
-    for (const fan of fans) await devices.toggleDeviceState(fan)
+
+    if(fans.length > 1){
+      for (const fan of fans) await devices.toggleDeviceState(fan)
+    } else {
+      await devices.toggleDeviceState(fans)
+    }
+    
   })
 
   await agenda.every('2 seconds', 'monitorSensorData')
