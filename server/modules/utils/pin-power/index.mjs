@@ -7,8 +7,6 @@ export class PinPower {
 
     await gpioDevice.writeSync(1)
 
-    // await gpioDevice.unexport()
-
     return true
   }
 
@@ -16,8 +14,6 @@ export class PinPower {
     const gpioDevice = new Gpio(device.gpioPin, 'out')
 
     await gpioDevice.writeSync(0)
-
-    // await gpioDevice.unexport()
 
     return true
   }
