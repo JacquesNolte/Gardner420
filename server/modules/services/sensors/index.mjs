@@ -21,12 +21,14 @@ export class Sensors extends BaseService {
 
   async readEnvironmentalData (insertIntoDb = false) {
     const environmentData = await bmeSensor.read()
-    const vpd = await this.calculateVPD(environmentData.temperature, environmentData.humidity)
+
+    environmentData.vpd = await this.calculateVPD(environmentData.temperature, environmentData.humidity)
+
     const soilMoisture = 0
     if (insertIntoDb) await this.models.values.create({
       temperature: environmentData.temperature,
       humidity: environmentData.humidity,
-      vpd: vpd,
+      vpd: environmentData.vpd,
       soilMoisture
     })
 
