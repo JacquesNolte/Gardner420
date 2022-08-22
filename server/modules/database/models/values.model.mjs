@@ -14,6 +14,10 @@ export const valuesSchema = new Schema({
   soilMoisture: {
     type: Schema.Types.Number,
     required: true,
+  },
+  vpd: {
+    type: Schema.Types.Number,
+    required: true,
   }
 }, { skipVersioning: true, versionKey: false, timestamps: true })
 
