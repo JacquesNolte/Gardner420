@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit {
       this.sensors.temperature = this.sensors.temperature.toFixed(2)
       this.sensors.humidity = this.sensors.humidity.toFixed(2)
       this.sensors.pressure = this.sensors.pressure.toFixed(2)
+      this.sensors.vpd = this.sensors.vpd.toFixed(2)
     })
   }
 

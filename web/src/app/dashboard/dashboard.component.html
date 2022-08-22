@@ -10,6 +10,10 @@
             <mat-card-content>
                 <p *ngIf="sensors">{{sensors.humidity}}%</p>
             </mat-card-content>
+            <mat-card-subtitle>VPD</mat-card-subtitle>
+            <mat-card-content>
+                <p *ngIf="sensors">{{sensors.vpd}}%</p>
+            </mat-card-content>
             <mat-card-subtitle>Grow Day</mat-card-subtitle>
             <mat-card-content>
                 <p>35</p>
