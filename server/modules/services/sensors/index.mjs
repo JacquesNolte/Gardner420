@@ -40,9 +40,7 @@ export class Sensors extends BaseService {
   }
 
   async calculateVPD(temperature, humidity) {
-
     const VPsat = 610.7 * Math.pow(10, (7.5 * temperature / (237.3 + temperature))) // Saturation vapor pressure in Pascals
-    const VPactual = (humidity * VPsat) / 100.0  // Actual vapor pressure in Pascals
     const vpd = ((100.0 - humidity) /100.0) * VPsat // Vapor Pressure Deficit in Pascals
 
     return vpd / 1000
