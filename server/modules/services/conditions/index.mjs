@@ -40,6 +40,21 @@ export class Conditions extends BaseService {
     return this.models.conditions.create(conditions)
   }
 
+  async setVpd (params) { // min: number, max: number
+    let conditions = await this.models.conditions.findOne().sort({ createdAt: -1 }).select(['-createdAt', '-updatedAt', '-_id']).lean()
+    conditions = conditions || { vpd: 1 }
+
+    switch (params) {
+      case params.vpd <= 4:
+        throw Error(`VPD cannot be greater than 4`)
+      default:
+        conditions.vpd = params.vpd
+        break
+    }
+
+    return this.models.conditions.create(conditions)
+  }
+
   async setSoilMoisture (params) { // min: number, max: number
     let conditions = await this.models.conditions.findOne().sort({ createdAt: -1 }).select(['-createdAt', '-updatedAt', '-_id']).lean()
     conditions = conditions || { soilMoisture: { max: 1, min: 0 } }

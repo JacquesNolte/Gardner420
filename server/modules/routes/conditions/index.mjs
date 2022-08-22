@@ -24,6 +24,13 @@ export async function routes (fastify, opts, next) {
     })
   })
 
+  fastify.post('/conditions/set-vpd', async function (request, reply) {
+    reply.send({
+      success: true,
+      data: { device: await conditions.setVpd(request.body) }
+    })
+  })
+
   fastify.post('/conditions/set-soil-moisture', async function (request, reply) {
     reply.send({
       success: true,

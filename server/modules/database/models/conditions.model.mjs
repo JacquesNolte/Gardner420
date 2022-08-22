@@ -30,6 +30,10 @@ export const conditionsSchema = new Schema({
       max: 65
     }
   },
+  vpd: {
+    type: Schema.Types.Number,
+    default: 1
+  },
   soilMoisture: {
     type: minMaxSchema,
     default: {
