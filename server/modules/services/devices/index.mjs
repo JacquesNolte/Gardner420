@@ -7,8 +7,21 @@ export class Devices extends BaseService {
       name: params.name,
       category: params.category,
       pin: params.pin,
-      gpioPin: params.gpioPin
+      gpioPin: params.gpioPin,
+      relay: params.relay
     })
+  }
+
+  async updateDevice (params) {
+    const device = await this.models.devices.findOneAndUpdate({ name: params.name }, {
+      name: params.name,
+      category: params.category,
+      pin: params.pin,
+      gpioPin: params.gpioPin,
+      keepActive: params.keepActive,
+      relay: params.relay
+    }, { new: true })
+    if (!device) throw Error('Device not found!')
   }
 
   async setDeviceState (params) {
@@ -44,6 +57,21 @@ export class Devices extends BaseService {
 
   async getDevices () {
     return await this.models.devices.find().lean()
+  }
+
+  async getCategories () {
+    return [
+      { value: 'switch', label: 'Switch' },
+      { value: 'extractor_fan', label: 'Extractor Fan' },
+      { value: 'circulation_fan', label: 'Circulation Fan' },
+      { value: 'heater', label: 'Heater' },
+      { value: 'humidifier', label: 'Humidifier' },
+      { value: 'dehumidifier', label: 'Dehumidifier' },
+      { value: 'heating_pad', label: 'Heating Pad' },
+      { value: 'pump', label: 'Pump'},
+      { value: 'air_pump', label: 'Air Pump'},
+      { value: 'light', label: 'Light'}
+    ]
   }
 
   async deleteDevice (params) { // name

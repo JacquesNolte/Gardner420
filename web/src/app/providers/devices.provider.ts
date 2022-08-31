@@ -25,14 +25,16 @@ export class DevicesProvider {
       .post<any>(environment.apiHost + '/api/devices/retrieve', {})
   }
 
-  public update (payload: any) {
-
-  }
-
   public create (payload: any) {
 
     return this.http
       .post<any>(environment.apiHost + '/api/devices/create', payload)
+  }
+
+  public update (payload: any) {
+
+    return this.http
+      .post<any>(environment.apiHost + '/api/devices/update', payload)
   }
 
   public delete (payload: any) {
@@ -45,5 +47,11 @@ export class DevicesProvider {
 
     return this.http
       .post<any>(environment.apiHost + '/api/devices/set-state', payload)
+  }
+
+  public getTypes () {
+
+    return this.http
+      .post<any>(environment.apiHost + '/api/devices/retrieve-types', {})
   }
 }

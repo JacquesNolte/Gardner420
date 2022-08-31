@@ -17,6 +17,13 @@ export async function routes (fastify, opts, next) {
     })
   })
 
+  fastify.post('/devices/update', async function (request, reply) {
+    reply.send({
+      success: true,
+      data: { device: await devices.updateDevice(request.body) }
+    })
+  })
+
   fastify.post('/devices/delete', async function (request, reply) {
     reply.send({
       success: true,
@@ -28,6 +35,13 @@ export async function routes (fastify, opts, next) {
     reply.send({
       success: true,
       data: { device: await devices.setDeviceState(request.body) }
+    })
+  })
+
+  fastify.post('/devices/retrieve-categories', async function (request, reply) {
+    reply.send({
+      success: true,
+      data: { devices: await devices.getCategories() }
     })
   })
 

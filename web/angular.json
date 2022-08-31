@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "test-app:build:production"
+              "browserTarget": "gardner:build:production"
             },
             "development": {
-              "browserTarget": "test-app:build:development"
+              "browserTarget": "gardner:build:development"
             }
           },
           "defaultConfiguration": "development"
