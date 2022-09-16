@@ -1,66 +1,79 @@
+import { DateTime } from 'luxon'
 import mongoose from 'mongoose'
 
 const { Schema } = mongoose
 
-const minMaxSchema = new Schema({
-  min: {
-    type: Schema.Types.Number,
-    required: true,
-    default: 0
-  },
-  max: {
-    type: Schema.Types.Number,
-    required: true,
-    default: 0
-  }
-}, { _id: false })
-
 export const conditionsSchema = new Schema({
-  temperature: {
-    type: minMaxSchema,
-    default: {
-      min: 18,
-      max: 28
-    }
-  },
-  humidity: {
-    type: minMaxSchema,
-    default: {
-      min: 45,
-      max: 65
-    }
-  },
-  vpd: {
-    type: Schema.Types.Number,
-    default: 1
-  },
-  soilMoisture: {
-    type: minMaxSchema,
-    default: {
-      min: 40,
-      max: 80
-    }
-  },
-  dayNightCycle: {
-    type: new Schema({
-      day: {
-        type: Schema.Types.Number,
-        required: true,
-        default: 8,
-        min: 0,
-        max: 23
+  type: 'array',
+  grows: {
+  type: 'object',
+    properties: {
+      growName: { type: 'string' },
+      startDate: { type: 'string' },
+      endDate: { type: 'string' },
+      plantType: { type: 'string' },
+      type: 'array',
+      pots: {
+        type: 'object',
+          properties: {
+            name: { type: 'string' },
+            type: { type: 'string' },
+            strain: { type: 'string' },
+            litres: { type: 'number' },
+            substrate: { type: 'string' },
+            position: { type: 'string' },
+            yield: {
+              type: 'object',
+              properties: {
+                cured: { type: 'string' },
+                harvest: { type: 'string' }
+              }
+            }
+          }
       },
-      night: {
-        type: Schema.Types.Number,
-        required: true,
-        default: 16,
-        min: 0,
-        max: 23
+      nutrients: { type: 'string' },
+      substrate: { type: 'string' },
+      type: 'array',
+      cycles: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          photoUrls: { type: 'array' },           
+          conditions: {
+            type: 'object',
+            properties: {
+              day: {
+                type: 'object',
+                properties: {
+                  temperature: { type: 'number' },
+                  temperatureOffset: { type: 'number' },
+                  humidity:{ type: 'number' },
+                  humidityOffset: { type: 'number' },
+                  vpd: { type: 'number' }
+                }
+              },
+              night: {
+                type: 'object',
+                properties: {
+                  temperature: { type: 'number' },
+                  temperatureOffset: { type: 'number' },
+                  humidity:{ type: 'number' },
+                  humidityOffset: { type: 'number' },
+                  vpd: { type: 'number' }
+                }
+              },
+              lightSchedule: {
+                type: 'object',
+                properties: {
+                  day: { type: 'number' },
+                  night: { type: 'number' },
+                }
+              },
+              startDate: { type: string }
+            }
+          }
+        }
       }
-    }, { _id: false }),
-    default: {
-      day: 16,
-      night: 8
     }
   }
 }, { skipVersioning: true, versionKey: false, timestamps: true })

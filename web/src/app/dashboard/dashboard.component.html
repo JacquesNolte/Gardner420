@@ -1,40 +1,216 @@
-<div layout="row" layout-xs="column">
-    <div flex>
-        <mat-card>
-            <mat-card-title>Dashboard</mat-card-title>
-            <mat-card-subtitle>Temperature</mat-card-subtitle>
-            <mat-card-content>
-                <p *ngIf="sensors">{{sensors.temperature}}°C</p>
-            </mat-card-content>
-            <mat-card-subtitle>Humidity</mat-card-subtitle>
-            <mat-card-content>
-                <p *ngIf="sensors">{{sensors.humidity}}%</p>
-            </mat-card-content>
-            <mat-card-subtitle>VPD</mat-card-subtitle>
-            <mat-card-content>
-                <p *ngIf="sensors">{{sensors.vpd}}%</p>
-            </mat-card-content>
-            <mat-card-subtitle>Grow Day</mat-card-subtitle>
-            <mat-card-content>
-                <p>35</p>
-            </mat-card-content>
-           
-        </mat-card>
+<div class="container">
+    <div class="row">
+        <div class="col-12 pt-3">
+            <h4>Devices</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p>Light</p>
+                        <i-bs name="lightbulb"
+                                    width="50"
+                                    height="50">
+                        </i-bs>
+                    </div>
+                    
+                    <div class="form-check form-switch">
+                        <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Light</label> -->
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p>Humidifier</p>
+                        <i-bs name="cloud-rain"
+                                    width="50"
+                                    height="50">
+                        </i-bs>
+                    </div>
+                    <div class="form-check form-switch">
+                        <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Humidifier</label> -->
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p>Fan</p>
+                        <i-bs name="fan"
+                                    width="50"
+                                    height="50">
+                        </i-bs>
+                    </div>
+                    <div class="form-check form-switch">
+                        <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Fan</label> -->
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p>Extraction Fan</p>
+                        <i-bs name="thermometer-snow"
+                                    width="50"
+                                    height="50">
+                        </i-bs>
+                    </div>
+                    <div class="form-check form-switch">
+                        <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Extraction Fan</label> -->
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p>Air Pump</p>
+                        <i-bs name="wind"
+                                    width="50"
+                                    height="50">
+                        </i-bs>
+                    </div>
+                    <div class="form-check form-switch">
+                        <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Air Pump</label> -->
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p>Heating Pad</p>
+                        <i-bs name="thermometer-sun"
+                                    width="50"
+                                    height="50">
+                        </i-bs>
+                    </div>
+                    <div class="form-check form-switch">
+                        <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Heating Pad</label> -->
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 pt-3">
+            <h4>Environment</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <ngx-gauge [type]="'semi'" 
+                            [value]="26.3" 
+                            [label]="'Temperature'"  
+                            [append]="'°C'"
+                            [min]="10"
+                            [max]="40"
+                            [thresholds]="temperatureThreshold"
+                            >
+                    </ngx-gauge>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <ngx-gauge [type]="'semi'" 
+                            [value]="55.5" 
+                            [label]="'Humidity'"  
+                            [append]="'%'"
+                            [min]="0"
+                            [max]="100"
+                            [thresholds]="humidityThreshold"
+                            >
+                    </ngx-gauge>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <ngx-gauge [type]="'semi'" 
+                            [value]="1.13" 
+                            [label]="'VPD'"  
+                            [min]="0"
+                            [max]="3"
+                            >
+                    </ngx-gauge>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <ngx-gauge [type]="'semi'" 
+                            [value]="35" 
+                            [label]="'Day'"  
+                            [min]="0"
+                            [max]="120"
+                            >
+                    </ngx-gauge>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Daily Temperatures</h5>
+                    <p class="card-text">Min: 21.3</p>
+                    <p class="card-text">Max: 27.1</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Daily Humidity</h5>
+                    <p class="card-text">Min: 21.3</p>
+                    <p class="card-text">Max: 27.1</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Daily VPD</h5>
+                    <p class="card-text">Min: 0.97</p>
+                    <p class="card-text">Max: 1.13</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 pt-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Daily Light Cycle</h5>
+                    <p class="card-text">On: 20:00</p>
+                    <p class="card-text">Off: 08:00</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div layout="row" layout-xs="column">
-    <div flex>
-        <mat-card>
-            <mat-card-content>
-                <mat-list>
-                    <mat-list-item *ngFor="let device of devices">
-                        <div mat-line class="title">{{ device.name }}</div>
-                        <div class="flex"></div>
-                        <mat-slide-toggle [(ngModel)]="device.active" (change)="setDeviceState(device)"></mat-slide-toggle>
-                    </mat-list-item>
-                </mat-list>
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>
+
+

@@ -1,48 +1,28 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav>
-    <p><button mat-button (click)="sidenav.toggle()">Menu</button></p>
-    <mat-action-list>
-      <button mat-list-item routerLink="/" routerLinkActive="active"> Dashboard </button>
-      <button mat-list-item routerLink="/devices" routerLinkActive="active"> Devices </button>
-      <button mat-list-item routerLink="/configuration" routerLinkActive="active"> Configuration </button>
-    </mat-action-list>
-  </mat-sidenav>
+<nav class="navbar navbar-light navbar-static-top" style="background-color: #32CD32;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/" routerLinkActive="active" data-bs-dismiss="offcanvas">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/devices" routerLinkActive="active" data-bs-dismiss="offcanvas">Devices</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/configuration" routerLinkActive="active" data-bs-dismiss="offcanvas">Configuration</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
 
-  <mat-sidenav-content>
-    <p><button mat-button (click)="sidenav.toggle()">Menu</button></p>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
-
-<!-- <ng-container>
-  <mat-toolbar class="example-header">Header</mat-toolbar>
-
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
-                 [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
-                 [fixedBottomGap]="options.value.bottom">
-      {{options.value.fixed ? 'Fixed' : 'Non-fixed'}} Sidenav
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-      <p><mat-checkbox>Fixed</mat-checkbox></p>
-      <p><mat-form-field appearance="fill">
-        <mat-label>Top gap</mat-label>
-        <input matInput type="number" formControlName="top">
-      </mat-form-field></p>
-      
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-
-  <mat-toolbar class="example-footer">Footer</mat-toolbar>
-</ng-container> -->
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
+<router-outlet></router-outlet>

@@ -1,41 +1,53 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MaterialModule} from './material-module'
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DevicesComponent, UpdateDeviceModal, AddDeviceModal } from './devices/devices.component';
-import { ConfigurationComponent } from './configuration/configuration.component';
+import { DevicesComponent } from './devices/devices.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfigurationComponent } from './configuration/configuration.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxGaugeModule } from 'ngx-gauge';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { alarm, alarmFill, alignBottom, thermometerHalf, thermometer, cloudRain, fan, lightbulb, dropletHalf, gearWideConnected, gear, hypnotize, moisture, snow3, thermometerSnow, thermometerSun, wind } from 'ngx-bootstrap-icons';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
-import { DevicesProvider, ConfigurationProvider,SensorsProvider } from './providers';
+const icons = {
+  alarm,
+  alarmFill,
+  alignBottom,
+  thermometerHalf,
+  thermometer,
+  cloudRain,
+  fan,
+  lightbulb,
+  dropletHalf,
+  gearWideConnected,
+  gear,
+  hypnotize,
+  moisture,
+  snow3,
+  thermometerSnow,
+  thermometerSun,
+  wind
+};
 
 @NgModule({
   declarations: [
     AppComponent,
     DevicesComponent,
-    ConfigurationComponent,
     DashboardComponent,
-    UpdateDeviceModal,
-    AddDeviceModal
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule, 
-    ReactiveFormsModule,
-    HttpClientModule,
+    NgxChartsModule,
+    NgxGaugeModule,
+    NgxBootstrapIconsModule.pick(icons),
+    ModalModule,
   ],
-  providers: [
-    DevicesProvider,
-    ConfigurationProvider,
-    SensorsProvider
-  ],
+  providers: [BsModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

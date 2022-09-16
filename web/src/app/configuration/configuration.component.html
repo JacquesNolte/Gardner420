@@ -1,49 +1,237 @@
-<div layout="row" layout-xs="column">
-    <div flex>
-        <mat-card>
-            <mat-card-title>Configuration</mat-card-title>
-            <mat-card-subtitle>Temperature</mat-card-subtitle>
-            <mat-card-content *ngIf="temperatureForm">
-                <form [formGroup]="temperatureForm" id="temperature" (ngSubmit)="setTemperature()">
-                    <mat-dialog-content>
-                        <mat-form-field>
-                            <input matInput placeholder="Min" formControlName="min" />
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput placeholder="Max" formControlName="max" />
-                        </mat-form-field>
-                    </mat-dialog-content>
-                </form>
-                <button class="mat-raised-button mat-primary" form="temperature" type="submit">Save</button>
-            </mat-card-content>
-            <mat-card-subtitle>Humidity</mat-card-subtitle>
-            <mat-card-content *ngIf="humidityForm">
-                <form [formGroup]="humidityForm" id="humidity" (ngSubmit)="setHumidity()">
-                    <mat-dialog-content>
-                        <mat-form-field>
-                            <input matInput placeholder="Min" formControlName="min" />
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput placeholder="Max" formControlName="max" />
-                        </mat-form-field>
-                    </mat-dialog-content>
-                </form>
-                <button class="mat-raised-button mat-primary" form="humidity" type="submit">Save</button>
-            </mat-card-content>
-            <mat-card-subtitle>Light Schedule</mat-card-subtitle>
-            <mat-card-content *ngIf="scheduleForm">
-                <form [formGroup]="scheduleForm" id="schedule" (ngSubmit)="setSchedule()">
-                    <mat-dialog-content>
-                        <mat-form-field>
-                            <input matInput placeholder="Day" formControlName="day" />
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput placeholder="Night" formControlName="night" />
-                        </mat-form-field>
-                    </mat-dialog-content>
-                </form>
-                <button class="mat-raised-button mat-primary" form="schedule" type="submit">Save</button>
-            </mat-card-content>
-        </mat-card>
+<div class="container">
+    <div class="row">
+        <div class="col-9 pt-3">
+            <h3>Grow Configuration</h3>
+        </div>
+        <div class="col-3 pt-3">
+            <div class="d-flex justify-content-end">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Select Grow
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Test Grow</a>
+                      <a class="dropdown-item" href="#">Test Grow 1</a>
+                      <a class="dropdown-item" href="#">Test Grow 2</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Name: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.grow_name }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Start Date: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.start_date }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Strains: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.strains }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Plant Type: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.plant_type }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Pot Type: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.pot_type }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+
+                        </div>
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Pot Size: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.pot_size }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Pot Count: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.pot_count }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Nutrients: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.nutrients }}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span>Substrate: </span>
+                                </div>
+                                <div class="col-8">
+                                    <span>{{ activeGrow.substrate }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 pt-3">
+            <h3>Grow Cycle Configuration</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" *ngFor="let cycle of activeGrow.cycles">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h4>{{cycle.name}}</h4>
+                      </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="card-title">Duration</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <span>Days: </span>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="text" class="form-control" placeholder="" aria-label="Start">
+                                    <span class="input-group-text">to</span>
+                                    <input type="text" class="form-control" placeholder="" aria-label="End">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="card-title">Temperature</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <span>Day:</span>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" placeholder="25" aria-label="day" aria-describedby="day">
+                                    <span class="input-group-text" id="day">°C</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <span>Day Zone:</span>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" placeholder="2" aria-label="day-zone" aria-describedby="day-zone">
+                                    <span class="input-group-text" id="day-zone">°C</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <span>Night:</span>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" placeholder="21" aria-label="night" aria-describedby="night">
+                                    <span class="input-group-text" id="night">°C</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <span>Night Zone:</span>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" placeholder="2" aria-label="night-zone" aria-describedby="night-zone">
+                                    <span class="input-group-text" id="night-zone">°C</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h5 class="card-title">VPD</h5>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check d-flex justify-content-end">
+                                    <input class="form-check-input" type="radio" name="togglePropVpd" id="togglePropVpd" (click)="setToggleVpd(togglePropVpd, 'togglePropVpd')" [checked]="togglePropVpd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <span>VPD Avg:</span>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" placeholder="0.9" aria-label="vpd" aria-describedby="vpd" [disabled]="togglePropVpd === false">
+                                    <span class="input-group-text" id="vpd">VPD</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h5 class="card-title">Humidity</h5>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check d-flex justify-content-end">
+                                    <input class="form-check-input" type="radio" name="togglePropVpd" id="togglePropVpd" (click)="setToggleVpd(togglePropVpd, 'togglePropVpd')" [checked]="!togglePropVpd">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <span>Humidity:</span>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" placeholder="55" aria-label="humidity" aria-describedby="humidity" [disabled]="togglePropVpd === true">
+                                    <span class="input-group-text" id="humidity">%</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <span>Zone:</span>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" placeholder="5" aria-label="humidity-zone" aria-describedby="humidity-zone" [disabled]="togglePropVpd === true">
+                                    <span class="input-group-text" id="humidity-zone">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
     </div>
 </div>

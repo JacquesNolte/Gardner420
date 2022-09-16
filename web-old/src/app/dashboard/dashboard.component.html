@@ -1,0 +1,40 @@
+<div layout="row" layout-xs="column">
+    <div flex>
+        <mat-card>
+            <mat-card-title>Dashboard</mat-card-title>
+            <mat-card-subtitle>Temperature</mat-card-subtitle>
+            <mat-card-content>
+                <p *ngIf="sensors">{{sensors.temperature}}°C</p>
+            </mat-card-content>
+            <mat-card-subtitle>Humidity</mat-card-subtitle>
+            <mat-card-content>
+                <p *ngIf="sensors">{{sensors.humidity}}%</p>
+            </mat-card-content>
+            <mat-card-subtitle>VPD</mat-card-subtitle>
+            <mat-card-content>
+                <p *ngIf="sensors">{{sensors.vpd}}%</p>
+            </mat-card-content>
+            <mat-card-subtitle>Grow Day</mat-card-subtitle>
+            <mat-card-content>
+                <p>35</p>
+            </mat-card-content>
+           
+        </mat-card>
+    </div>
+</div>
+
+<div layout="row" layout-xs="column">
+    <div flex>
+        <mat-card>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item *ngFor="let device of devices">
+                        <div mat-line class="title">{{ device.name }}</div>
+                        <div class="flex"></div>
+                        <mat-slide-toggle [(ngModel)]="device.active" (change)="setDeviceState(device)"></mat-slide-toggle>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
